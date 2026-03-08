@@ -4,7 +4,7 @@ import { phases } from "@/app/playbook/spain-dnv/data";
 import { guides } from "@/app/playbook/spain-dnv/guides/data";
 
 const google = createGoogleGenerativeAI({
-  apiKey: process.env.GEMINI_API_KEY,
+  apiKey: process.env.GEMINI_API_KEY || "placeholder",
 });
 
 // Helper to format the playbook data into a readable string for the LLM

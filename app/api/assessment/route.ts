@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : (null as unknown as Resend);
 
 // ─── Label maps ───────────────────────────────────────────────────────────────
 
@@ -53,11 +55,16 @@ const questionLabels: Record<string, string> = {
 };
 
 function getVerdict(answers: Record<string, string>): string {
-  const { 1: work, 2: nationality, 3: income } = answers as Record<number, string>;
+  const {
+    1: work,
+    2: nationality,
+    3: income,
+  } = answers as Record<number, string>;
 
   if (nationality === "eu_citizen") return "🇪🇺 EU Citizen — doesn't need DNV";
   if (work === "planning") return "🔭 Still planning — not yet ready";
-  if (income === "under_2000") return "🔴 Income below threshold — needs to build up";
+  if (income === "under_2000")
+    return "🔴 Income below threshold — needs to build up";
 
   let score = 0;
   if (income === "above") score += 3;
@@ -189,19 +196,22 @@ export async function POST(request: NextRequest) {
               })
               .join("\n");
 
-            await fetch(`${process.env.GHL_BASE_URL}contacts/${contactId}/notes`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Version: "2021-07-28",
-                Authorization: `Bearer ${process.env.GHL_TOKEN}`,
+            await fetch(
+              `${process.env.GHL_BASE_URL}contacts/${contactId}/notes`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  Version: "2021-07-28",
+                  Authorization: `Bearer ${process.env.GHL_TOKEN}`,
+                },
+                body: JSON.stringify({
+                  userId: contactId,
+                  body: `DNV Assessment Results\n\nVerdict: ${verdict}\n\n${noteLines}`,
+                }),
               },
-              body: JSON.stringify({
-                userId: contactId,
-                body: `DNV Assessment Results\n\nVerdict: ${verdict}\n\n${noteLines}`,
-              }),
-            });
+            );
           }
         }
       } catch (ghlError) {
@@ -212,6 +222,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Assessment API error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }
