@@ -1,0 +1,7 @@
+id,Created (UTC),Active,Currency,Url,Allow Promotion Codes,Automatic Tax,Billing Address Collection,Shipping Address Collection Countries,Phone Number Collection,After Completion Type,Name
+plink_1T6ikp3P2IqTG1ceAcECQgwq,2026-03-03 02:32,true,eur,https://buy.stripe.com/9B67sE8UG9d06Rj2dbew805,false,true,auto,,false,hosted_confirmation,The VIP Concierge
+plink_1T6ijr3P2IqTG1ced6ccoWjf,2026-03-03 02:31,true,eur,https://buy.stripe.com/3cI00cb2O2OC3F76trew804,false,true,auto,,false,hosted_confirmation,The Guided Navigator
+plink_1T6iih3P2IqTG1ceigWh1TSG,2026-03-03 02:29,true,eur,https://buy.stripe.com/cNi9AMc6Sexk5Nf6trew803,false,true,auto,,false,hosted_confirmation,The Solo Voyager
+plink_1T6idx3P2IqTG1ceqmAEqDw1,2026-03-03 02:25,true,eur,https://buy.stripe.com/28EbIU3Am88W8Zr6trew802,false,true,auto,,true,hosted_confirmation,Regreso Appointment
+plink_1T6idA3P2IqTG1ceVGSVMaob,2026-03-03 02:24,true,eur,https://buy.stripe.com/5kQ7sE4EqgFs7Vn197ew801,false,true,auto,,true,hosted_confirmation,TIE Appointment
+plink_1T6icG3P2IqTG1ceQPnH8NZb,2026-03-03 02:23,true,eur,https://buy.stripe.com/fZudR27QC9d0a3vcRPew800,false,true,auto,,true,hosted_confirmation,NIE Appointment
